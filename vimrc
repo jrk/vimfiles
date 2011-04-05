@@ -215,8 +215,8 @@ set ttymouse=xterm2
 set hidden
 
 "Command-T configuration
-let g:CommandTMaxHeight=15
-let g:CommandTMatchWindowAtTop=1
+"let g:CommandTMaxHeight=15
+"let g:CommandTMatchWindowAtTop=1
 
 if has("gui_running")
     "tell the term has 256 colors
@@ -268,8 +268,8 @@ endif
 " else in your ~/.vimrc file, such as:
 " nmap <silent> <Leader>q <Plug>PeepOpen
 
-silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
-nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
+"silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
+"nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
@@ -415,8 +415,8 @@ if has("autocmd")
   autocmd bufwritepost vimrc source $MYVIMRC
 endif
 
-" Edit vimrc in new tab via `,v`
-let mapleader = ","
+" Edit vimrc in new tab via `\v`
+"let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Arrow keys as text shifters
@@ -505,8 +505,8 @@ endfunction
 call SetArrowKeysAsTextShifters()
 
 "make vertical splits always maximize the currently-selected view
-set winminheight=0
-set winheight=999
+"set winminheight=0
+"set winheight=999
 
 "disable scrollbars
 set guioptions-=r
