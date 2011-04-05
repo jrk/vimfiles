@@ -20,7 +20,7 @@ set showmode    "show current mode down the bottom
 set incsearch   "find the next match as we type the search
 set hlsearch    "hilight searches by default
 
-set number      "add line numbers
+"set number      "add line numbers
 set showbreak=...
 set wrap linebreak nolist
 
@@ -44,9 +44,9 @@ set linespace=4
 set visualbell t_vb=
 
 "try to make possible to navigate within lines of wrapped lines
-nmap <Down> gj
-nmap <Up> gk
-set fo=l
+"nmap <Down> gj
+"nmap <Up> gk
+"set fo=l
 
 "statusline setup
 set statusline=%f       "tail of the filename
@@ -55,7 +55,7 @@ set statusline=%f       "tail of the filename
 set statusline+=[%{GitBranch()}]
 
 "RVM
-set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
+"set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
 
 set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
@@ -174,8 +174,8 @@ function! s:Median(nums)
 endfunction
 
 "indent settings
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 set autoindent
 
@@ -215,14 +215,14 @@ set ttymouse=xterm2
 set hidden
 
 "Command-T configuration
-let g:CommandTMaxHeight=10
+let g:CommandTMaxHeight=15
 let g:CommandTMatchWindowAtTop=1
 
 if has("gui_running")
     "tell the term has 256 colors
-    set t_Co=256
+    "set t_Co=256
 
-    colorscheme railscasts
+    colorscheme zenburn
     set guitablabel=%M%t
     set lines=40
     set columns=115
@@ -234,17 +234,17 @@ if has("gui_running")
     endif
 
     if has("gui_mac") || has("gui_macvim")
-        set guifont=Menlo:h14
+        set guifont=Anonymous\ Pro:h13
         " key binding for Command-T to behave properly
         " uncomment to replace the Mac Command-T key to Command-T plugin
         "macmenu &File.New\ Tab key=<nop>
         "map <D-t> :CommandT<CR>
         " make Mac's Option key behave as the Meta key
         set invmmta
-        try
-          set transparency=5
-        catch
-        endtry
+        "try
+        "  set transparency=5
+        "catch
+        "endtry
     endif
 
     if has("gui_win32") || has("gui_win32s")
@@ -386,6 +386,8 @@ nmap <D-]> >>
 vmap <D-[> <gv
 vmap <D-]> >gv
 
+"Define ScreenShot to open a buffer with HTML of the current
+"syntax-highlighted buffer view.
 let ScreenShot = {'Icon':0, 'Credits':0, 'force_background':'#FFFFFF'}
 
 "Enabling Zencoding
@@ -405,3 +407,107 @@ let g:user_zen_settings = {
   \  },
  \}
 
+"
+" BEGIN jrk
+"
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost vimrc source $MYVIMRC
+endif
+
+" Edit vimrc in new tab via `,v`
+let mapleader = ","
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
+" Arrow keys as text shifters
+function! DelEmptyLineAbove()
+    if line(".") == 1
+        return
+    endif
+    let l:line = getline(line(".") - 1)
+    if l:line =~ '^\s*$'
+        let l:colsave = col(".")
+        .-1d
+        silent normal! <C-y>
+        call cursor(line("."), l:colsave)
+    endif
+endfunction
+ 
+function! AddEmptyLineAbove()
+    let l:scrolloffsave = &scrolloff
+    " Avoid jerky scrolling with ^E at top of window
+    set scrolloff=0
+    call append(line(".") - 1, "")
+    if winline() != winheight(0)
+        silent normal! <C-e>
+    endif
+    let &scrolloff = l:scrolloffsave
+endfunction
+ 
+function! DelEmptyLineBelow()
+    if line(".") == line("$")
+        return
+    endif
+    let l:line = getline(line(".") + 1)
+    if l:line =~ '^\s*$'
+        let l:colsave = col(".")
+        .+1d
+        ''
+        call cursor(line("."), l:colsave)
+    endif
+endfunction
+ 
+function! AddEmptyLineBelow()
+    call append(line("."), "")
+endfunction
+ 
+" Arrow key remapping: Up/Dn = move line up/dn; Left/Right = indent/unindent
+function! SetArrowKeysAsTextShifters()
+    " normal mode
+    nmap <silent> <Left> <<
+    nmap <silent> <Right> >>
+    nnoremap <silent> <Up> <Esc>:call DelEmptyLineAbove()<CR>
+    nnoremap <silent> <Down>  <Esc>:call AddEmptyLineAbove()<CR>
+    nnoremap <silent> <C-Up> <Esc>:call DelEmptyLineBelow()<CR>
+    nnoremap <silent> <C-Down> <Esc>:call AddEmptyLineBelow()<CR>
+ 
+    " visual mode
+    vmap <silent> <Left> <
+    vmap <silent> <Right> >
+    vnoremap <silent> <Up> <Esc>:call DelEmptyLineAbove()<CR>gv
+    vnoremap <silent> <Down>  <Esc>:call AddEmptyLineAbove()<CR>gv
+    vnoremap <silent> <C-Up> <Esc>:call DelEmptyLineBelow()<CR>gv
+    vnoremap <silent> <C-Down> <Esc>:call AddEmptyLineBelow()<CR>gv
+ 
+    " insert mode
+    imap <silent> <Left> <C-D>
+    imap <silent> <Right> <C-T>
+    inoremap <silent> <Up> <Esc>:call DelEmptyLineAbove()<CR>a
+    inoremap <silent> <Down> <Esc>:call AddEmptyLineAbove()<CR>a
+    inoremap <silent> <C-Up> <Esc>:call DelEmptyLineBelow()<CR>a
+    inoremap <silent> <C-Down> <Esc>:call AddEmptyLineBelow()<CR>a
+ 
+    " disable modified versions we are not using
+    nnoremap  <S-Up>     <NOP>
+    nnoremap  <S-Down>   <NOP>
+    nnoremap  <S-Left>   <NOP>
+    nnoremap  <S-Right>  <NOP>
+    vnoremap  <S-Up>     <NOP>
+    vnoremap  <S-Down>   <NOP>
+    vnoremap  <S-Left>   <NOP>
+    vnoremap  <S-Right>  <NOP>
+    inoremap  <S-Up>     <NOP>
+    inoremap  <S-Down>   <NOP>
+    inoremap  <S-Left>   <NOP>
+    inoremap  <S-Right>  <NOP>
+endfunction
+ 
+call SetArrowKeysAsTextShifters()
+
+"make vertical splits always maximize the currently-selected view
+set winminheight=0
+set winheight=999
+
+"disable scrollbars
+set guioptions-=r
+set guioptions-=L
