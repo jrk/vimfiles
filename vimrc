@@ -511,3 +511,17 @@ call SetArrowKeysAsTextShifters()
 "disable scrollbars
 set guioptions-=r
 set guioptions-=L
+
+"Set some clang_complete options
+let g:clang_snippets=1
+let g:clang_complete_copen=1
+nmap <leader>q :call g:ClangUpdateQuickFix()<CR>
+let g:clang_user_options='|| exit 0' " complete even with errors
+
+"Set filetype for simplenote to markdown
+" DOESN'T WORK YET
+"autocmd BufNewFile,BufRead */simplenote/*.txt setf markdown
+"autocmd BufNewFile,BufRead Notational*txt setf markdown
+
+"Bind cmd-shift-return to add semicolon, new line
+nmap <D-S-Return> A;<CR><Esc>
