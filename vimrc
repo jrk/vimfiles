@@ -222,7 +222,7 @@ if has("gui_running")
     "tell the term has 256 colors
     "set t_Co=256
 
-    colorscheme zenburn
+    colorscheme twilight
     set guitablabel=%M%t
     set lines=40
     set columns=115
@@ -416,7 +416,7 @@ if has("autocmd")
 endif
 
 " Edit vimrc in new tab via `\v`
-"let mapleader = ","
+let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Arrow keys as text shifters
@@ -502,7 +502,7 @@ function! SetArrowKeysAsTextShifters()
     inoremap  <S-Right>  <NOP>
 endfunction
  
-call SetArrowKeysAsTextShifters()
+"call SetArrowKeysAsTextShifters()
 
 "make vertical splits always maximize the currently-selected view
 "set winminheight=0
