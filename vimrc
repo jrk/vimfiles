@@ -1,6 +1,9 @@
 "necessary on some Linux distros for pathogen to properly load bundles
 filetype off
 
+"Set leader to `,`
+let mapleader = ","
+
 "load pathogen managed plugins
 call pathogen#runtime_append_all_bundles()
 
@@ -416,7 +419,6 @@ if has("autocmd")
 endif
 
 " Edit vimrc in new tab via `\v`
-let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Arrow keys as text shifters
@@ -514,9 +516,13 @@ set guioptions-=L
 
 "Set some clang_complete options
 let g:clang_snippets=1
-let g:clang_complete_copen=1
+"let g:clang_complete_copen=1
 nmap <leader>q :call g:ClangUpdateQuickFix()<CR>
 let g:clang_user_options='|| exit 0' " complete even with errors
+"Use persistent libclang via python. Requires libclang.dylib in
+"DYLD_LIBRARY_PATH.
+let g:clang_use_library=1
+"let g:clang_debug=1
 
 "Set filetype for simplenote to markdown
 " DOESN'T WORK YET
@@ -525,3 +531,17 @@ let g:clang_user_options='|| exit 0' " complete even with errors
 
 "Bind cmd-shift-return to add semicolon, new line
 nmap <D-S-Return> A;<CR><Esc>
+
+"Set ^m to vertically-maximize the window
+nmap <silent> <C-M> :set lines=200<CR>
+
+"Map Emacs ^a/^e
+imap <C-A> <Home>
+imap <C-E> <End>
+
+" backup to ~/.tmp 
+set backup 
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+set backupskip=/tmp/*,/private/tmp/* 
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+set writebackup
