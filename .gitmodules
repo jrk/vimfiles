@@ -110,15 +110,9 @@
 [submodule "bundle/abolish"]
 	path = bundle/abolish
 	url = git://github.com/tpope/vim-abolish.git
-[submodule "bundle/liftweb"]
-	path = bundle/liftweb
-	url = git://github.com/Shadowfiend/liftweb-vim.git
 [submodule "bundle/scala"]
 	path = bundle/scala
 	url = git://github.com/akhil/scala-vim-bundle.git
-[submodule "bundle/grails-vim"]
-	path = bundle/grails-vim
-	url = git://github.com/felipero/grails-vim.git
 [submodule "bundle/clojure"]
 	path = bundle/clojure
 	url = git://github.com/vim-scripts/VimClojure.git
@@ -137,3 +131,6 @@
 [submodule "bundle/pandoc"]
 	path = bundle/pandoc
 	url = https://github.com/dsanson/vim-pandoc.git
+[submodule "bundle/easymotion"]
+	path = bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
