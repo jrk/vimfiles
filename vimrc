@@ -542,3 +542,10 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/* 
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
 set writebackup
+
+
+" map Esc to :noh to turn off search highlights (until the next search or `n`)
+nnoremap <esc> :noh<return><esc>
+
+" EasyMotion leader
+let g:EasyMotion_leader_key = '<Leader>e'
