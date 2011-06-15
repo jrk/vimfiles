@@ -131,6 +131,9 @@
 [submodule "bundle/pandoc"]
 	path = bundle/pandoc
 	url = https://github.com/dsanson/vim-pandoc.git
+[submodule "bundle/latex-box"]
+	path = bundle/latex-box
+	url = https://github.com/vim-scripts/LaTeX-Box.git
 [submodule "bundle/easymotion"]
 	path = bundle/easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
