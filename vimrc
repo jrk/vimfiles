@@ -549,3 +549,10 @@ nnoremap <esc> :noh<return><esc>
 
 " EasyMotion leader
 let g:EasyMotion_leader_key = '<Leader>e'
+
+" This will highlight characters on lines that exceed the 80 character mark.
+"match ErrorMsg /\%81v.\+/
+
+" Persistent undo
+set undofile
+set undodir=~/.undo
