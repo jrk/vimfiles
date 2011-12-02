@@ -534,6 +534,10 @@ let g:clang_use_library=1
 
 "Bind cmd-shift-return to add semicolon, new line
 nmap <D-S-Return> A;<CR><Esc>
+"Bind cmd-/ to toggle comment
+nmap <silent> <D-/> :call NERDComment(0, 'toggle')<CR>
+vmap <silent> <D-/> :call NERDComment(1, 'toggle')<CR>
+imap <silent> <D-/> :call NERDComment(0, 'toggle')<CR>
 
 "Set ^m to vertically-maximize the window
 nmap <silent> <C-M> :set lines=200<CR>
