@@ -557,6 +557,9 @@ let g:EasyMotion_leader_key = '<Leader>e'
 set undofile
 set undodir=~/.undo
 
+"Set MacVim full-screen to only maximize vertically
+set fuopt=maxvert
+
 " OCaml tabstop, to match omlet_indent behavior
 autocmd FileType omlet setlocal expandtab shiftwidth=2 softtabstop=2
 
