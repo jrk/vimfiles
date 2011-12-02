@@ -422,7 +422,7 @@ if has("autocmd")
 endif
 
 " Edit vimrc in new tab via `\v`
-nmap <leader>v :tabedit $MYVIMRC<CR>
+"nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Arrow keys as text shifters
 function! DelEmptyLineAbove()
@@ -573,3 +573,25 @@ set scrolloff=3
 " Reduces spew, startup screen
 " See :help shortmess for the breakdown
 set shortmess=atI
+
+" This will highlight characters on lines that exceed the 80 character mark.
+"match ErrorMsg /\%81v.\+/
+
+" Persistent undo
+set undofile
+set undodir=~/.undo
+
+"Set MacVim full-screen to only maximize vertically
+set fuopt=maxvert
+
+" OCaml tabstop, to match omlet_indent behavior
+autocmd FileType omlet setlocal expandtab shiftwidth=2 softtabstop=2
+
+"Make tab run indentation when hit in insert mode, a la Emacs (C-f is the default for that in Vim):
+" NOTE: this may conflict with snipmate expansion
+"autocmd FileType omlet set indentkeys+=,!^I
+
+"OMLet OCaml settings
+"http://www.lix.polytechnique.fr/~dbaelde/productions/omlet.html
+"let g:ocaml_folding = 1
+let g:omlet_indent_let = 0

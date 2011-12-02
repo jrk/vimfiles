@@ -140,3 +140,6 @@
 [submodule "bundle/alignta"]
 	path = bundle/alignta
 	url = https://github.com/h1mesuke/vim-alignta.git
+[submodule "bundle/vimroom"]
+	path = bundle/vimroom
+	url = https://github.com/mikewest/vimroom.git
