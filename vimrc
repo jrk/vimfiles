@@ -208,6 +208,7 @@ set sidescroll=1
 "load ftplugins and indent files
 filetype plugin on
 filetype indent on
+filetype plugin indent on
 
 "turn on syntax highlighting
 syntax on
@@ -554,3 +555,15 @@ nnoremap <esc> :noh<return><esc>
 
 " EasyMotion leader
 let g:EasyMotion_leader_key = '<Leader>e'
+
+" Good ideas via http://items.sjbach.com/319/configuring-vim-right
+"Use smart-case searching
+set ignorecase 
+set smartcase
+
+"Keep more context around the cursor near frame edges
+set scrolloff=3
+
+" Reduces spew, startup screen
+" See :help shortmess for the breakdown
+set shortmess=atI
