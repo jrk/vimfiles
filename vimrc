@@ -193,6 +193,11 @@ set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 "set listchars=tab:\ \ ,extends:>,precedes:<
 " disabling list because it interferes with soft wrap
 
+" make tabs and trailing spaces visible when requested:
+"By default whitespace will be hidden, but now it can be toggled with <leader>s.
+set listchars=tab:>-,trail:·,eol:$
+nmap <silent> <leader>s :set nolist!<CR>
+
 set formatoptions-=o "dont continue comments when pushing o/O
 
 "vertical/horizontal scroll off settings
