@@ -524,8 +524,10 @@ nmap <leader>q :call g:ClangUpdateQuickFix()<CR>
 let g:clang_user_options='|| exit 0' " complete even with errors
 "Use persistent libclang via python. Requires libclang.dylib in
 "DYLD_LIBRARY_PATH.
-let g:clang_use_library=1
-"let g:clang_debug=1
+"let g:clang_library_path='/Volumes/luxo/Users/jrk/Dropbox/Projects/fimage/FImage/llvm/Debug+Asserts/lib/'
+let g:clang_library_path='/Developer/usr/clang-ide/lib'
+"let g:clang_use_library=1
+let g:clang_debug=1
 
 "Set filetype for simplenote to markdown
 " DOESN'T WORK YET
