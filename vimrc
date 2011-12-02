@@ -416,7 +416,7 @@ if has("autocmd")
 endif
 
 " Edit vimrc in new tab via `\v`
-nmap <leader>v :tabedit $MYVIMRC<CR>
+"nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Arrow keys as text shifters
 function! DelEmptyLineAbove()
