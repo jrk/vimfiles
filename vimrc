@@ -556,3 +556,15 @@ let g:EasyMotion_leader_key = '<Leader>e'
 " Persistent undo
 set undofile
 set undodir=~/.undo
+
+" OCaml tabstop, to match omlet_indent behavior
+autocmd FileType omlet setlocal expandtab shiftwidth=2 softtabstop=2
+
+"Make tab run indentation when hit in insert mode, a la Emacs (C-f is the default for that in Vim):
+" NOTE: this may conflict with snipmate expansion
+"autocmd FileType omlet set indentkeys+=,!^I
+
+"OMLet OCaml settings
+"http://www.lix.polytechnique.fr/~dbaelde/productions/omlet.html
+let g:ocaml_folding = 1
+let g:omlet_indent_let = 0
