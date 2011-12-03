@@ -595,3 +595,5 @@ autocmd FileType omlet setlocal expandtab shiftwidth=2 softtabstop=2
 "http://www.lix.polytechnique.fr/~dbaelde/productions/omlet.html
 "let g:ocaml_folding = 1
 let g:omlet_indent_let = 0
+
+autocmd FileType ocaml set commentstring=(*\ %s\ *)
