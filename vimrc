@@ -287,6 +287,12 @@ nnoremap <leader>b :BufExplorer<cr>
 "map to CommandT TextMate style finder
 nnoremap <leader>t :CommandT<CR>
 
+"Ignore stuff in CommandT
+:set wildignore+=*.o,*.obj,.git,_build
+
+"set <LocalLeader> to , instead of \, to let OCaml's \t not overload CommandT
+let maplocalleader = ","
+
 "map Q to something useful
 noremap Q gq
 
