@@ -17,17 +17,17 @@ if has("gui_running")
     endif
 
     if has("gui_mac") || has("gui_macvim")
-        set guifont=Anonymous\ Pro:h15
         " key binding for Command-T to behave properly
         " uncomment to replace the Mac Command-T key to Command-T plugin
-        "macmenu &File.New\ Tab key=<nop>
+        " TODO: neither of these seems to work
+        "macm File.New\ Tab key=<nop>
         "map <D-t> :CommandT<CR>
+
+        " Set font
+        set guifont=Anonymous\ Pro:h15
+
         " make Mac's Option key behave as the Meta key
         set invmmta
-        "try
-        "  set transparency=5
-        "catch
-        "endtry
     endif
 
     if has("gui_win32") || has("gui_win32s")
