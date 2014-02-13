@@ -1,12 +1,42 @@
-"necessary on some Linux distros for pathogen to properly load bundles
+"Use Vim settings, rather then Vi settings (much better!).
+"This must be first, because it changes other options as a side effect.
+set nocompatible
+
+"necessary for Pathogen/Vundle to properly load bundles
 filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+
+" My bundles here:
+"
+" original repos on GitHub
+"Bundle 'tpope/vim-fugitive'
+Bundle 'kien/ctrlp.vim'
+
+filetype plugin indent on     " required!
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install (update) bundles
+" :BundleSearch(!) foo - search (or refresh cache first) for foo
+" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle commands are not allowed.
 
 if has("gui_running")
     "tell the term has 256 colors
     "set t_Co=256
 
-    colorscheme pablo
-    "twilight-tm "zenburn
+    "colorscheme pablo
+    colorscheme twilight-tm
+    "colorscheme zenburn
     set guitablabel=%M%t
     set lines=40
     set columns=115
@@ -40,13 +70,6 @@ else
         colorscheme default
     endif
 endif
-
-"load pathogen managed plugins
-"call pathogen#runtime_append_all_bundles()
-
-"Use Vim settings, rather then Vi settings (much better!).
-"This must be first, because it changes other options as a side effect.
-set nocompatible
 
 "allow backspacing over everything in insert mode
 set backspace=indent,eol,start
