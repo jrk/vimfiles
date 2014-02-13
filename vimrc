@@ -5,7 +5,8 @@ if has("gui_running")
     "tell the term has 256 colors
     "set t_Co=256
 
-    colorscheme twilight-tm "zenburn
+    colorscheme pablo
+    "twilight-tm "zenburn
     set guitablabel=%M%t
     set lines=40
     set columns=115
@@ -17,17 +18,8 @@ if has("gui_running")
     endif
 
     if has("gui_mac") || has("gui_macvim")
-        set guifont=Anonymous\ Pro:h15
-        " key binding for Command-T to behave properly
-        " uncomment to replace the Mac Command-T key to Command-T plugin
-        "macmenu &File.New\ Tab key=<nop>
-        "map <D-t> :CommandT<CR>
-        " make Mac's Option key behave as the Meta key
+        set guifont=Consolas:h15
         set invmmta
-        "try
-        "  set transparency=5
-        "catch
-        "endtry
     endif
 
     if has("gui_win32") || has("gui_win32s")
@@ -48,7 +40,7 @@ else
 endif
 
 "load pathogen managed plugins
-call pathogen#runtime_append_all_bundles()
+"call pathogen#runtime_append_all_bundles()
 
 "Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
@@ -98,10 +90,7 @@ set visualbell t_vb=
 set statusline=%f       "tail of the filename
 
 "Git
-set statusline+=[%{GitBranch()}]
-
-"RVM
-"set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
+"set statusline+=[%{GitBranch()}]
 
 set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
@@ -111,23 +100,6 @@ set laststatus=2
 
 "turn off needless toolbar on gvim/mvim
 set guioptions-=T
-
-"recalculate the trailing whitespace warning when idle, and after saving
-autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
-
-"return '[\s]' if trailing white space is detected
-"return '' otherwise
-function! StatuslineTrailingSpaceWarning()
-    if !exists("b:statusline_trailing_space_warning")
-        if search('\s\+$', 'nw') != 0
-            let b:statusline_trailing_space_warning = '[\s]'
-        else
-            let b:statusline_trailing_space_warning = ''
-        endif
-    endif
-    return b:statusline_trailing_space_warning
-endfunction
-
 
 "return the syntax highlight group under the cursor ''
 function! StatuslineCurrentHighlight()
@@ -234,11 +206,6 @@ set wildmode=list:longest   "make cmdline tab completion similar to bash
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 
-"display tabs and trailing spaces
-"set list
-"set listchars=tab:\ \ ,extends:>,precedes:<
-" disabling list because it interferes with soft wrap
-
 " make tabs and trailing spaces visible when requested:
 "By default whitespace will be hidden, but now it can be toggled with <leader>s.
 set listchars=tab:>-,trail:·,eol:$
@@ -266,94 +233,18 @@ set ttymouse=xterm2
 "hide buffers when not displayed
 set hidden
 
-"Command-T configuration
-"let g:CommandTMaxHeight=15
-"let g:CommandTMatchWindowAtTop=1
-
-" PeepOpen uses <Leader>p as well so you will need to redefine it so something
-" else in your ~/.vimrc file, such as:
-" nmap <silent> <Leader>q <Plug>PeepOpen
-
-"silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
-"nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
-
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
 
-"map to bufexplorer
-nnoremap <leader>b :BufExplorer<cr>
-
-"map to CommandT TextMate style finder
-nnoremap <leader>t :CommandT<CR>
-
 "Ignore stuff in CommandT
 :set wildignore+=*.o,*.obj,.git,_build
-
-"set <LocalLeader> to , instead of \, to let OCaml's \t not overload CommandT
-let maplocalleader = ","
 
 "map Q to something useful
 noremap Q gq
 
 "make Y consistent with C and D
 nnoremap Y y$
-
-"bindings for ragtag
-inoremap <M-o>       <Esc>o
-inoremap <C-j>       <Down>
-let g:ragtag_global_maps = 1
-
-"mark syntax errors with :signs
-let g:syntastic_enable_signs=1
-
-"key mapping for vimgrep result navigation
-map <A-o> :copen<CR>
-map <A-q> :cclose<CR>
-map <A-j> :cnext<CR>
-map <A-k> :cprevious<CR>
-
-"snipmate setup
-try
-  source ~/.vim/snippets/support_functions.vim
-catch
-  source ~/vimfiles/snippets/support_functions.vim
-endtry
-autocmd vimenter * call s:SetupSnippets()
-function! s:SetupSnippets()
-
-    "if we're in a rails env then read in the rails snippets
-    if filereadable("./config/environment.rb")
-      try
-        call ExtractSnips("~/.vim/snippets/ruby-rails", "ruby")
-        call ExtractSnips("~/.vim/snippets/eruby-rails", "eruby")
-      catch
-        call ExtractSnips("~/vimfiles/snippets/ruby-rails", "ruby")
-        call ExtractSnips("~/vimfiles/snippets/eruby-rails", "eruby")
-      endtry
-    endif
-
-    try
-      call ExtractSnips("~/.vim/snippets/html", "eruby")
-      call ExtractSnips("~/.vim/snippets/html", "xhtml")
-      call ExtractSnips("~/.vim/snippets/html", "php")
-    catch
-      call ExtractSnips("~/vimfiles/snippets/html", "eruby")
-      call ExtractSnips("~/vimfiles/snippets/html", "xhtml")
-      call ExtractSnips("~/vimfiles/snippets/html", "php")
-    endtry
-endfunction
-
-"visual search mappings
-function! s:VSetSearch()
-    let temp = @@
-    norm! gvy
-    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-    let @@ = temp
-endfunction
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
-
 
 "jump to last cursor position when opening a file
 "dont do it when writing a commit log entry
@@ -365,18 +256,6 @@ function! SetCursorPosition()
             normal! zz
         endif
     end
-endfunction
-
-"define :HighlightLongLines command to highlight the offending parts of
-"lines that are longer than the specified length (defaulting to 80)
-command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
-function! s:HighlightLongLines(width)
-    let targetWidth = a:width != '' ? a:width : 79
-    if targetWidth > 0
-        exec 'match Todo /\%>' . (targetWidth) . 'v/'
-    else
-        echomsg "Usage: HighlightLongLines [natural number]"
-    endif
 endfunction
 
 "key mapping for window navigation
@@ -398,27 +277,6 @@ nmap <D-]> >>
 vmap <D-[> <gv
 vmap <D-]> >gv
 
-"Define ScreenShot to open a buffer with HTML of the current
-"syntax-highlighted buffer view.
-let ScreenShot = {'Icon':0, 'Credits':0, 'force_background':'#FFFFFF'}
-
-"Enabling Zencoding
-let g:user_zen_settings = {
-  \  'php' : {
-  \    'extends' : 'html',
-  \    'filters' : 'c',
-  \  },
-  \  'xml' : {
-  \    'extends' : 'html',
-  \  },
-  \  'haml' : {
-  \    'extends' : 'html',
-  \  },
-  \  'erb' : {
-  \    'extends' : 'html',
-  \  },
- \}
-
 "
 " BEGIN jrk
 "
@@ -428,7 +286,7 @@ if has("autocmd")
 endif
 
 " Edit vimrc in new tab via `\v`
-"nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Arrow keys as text shifters
 function! DelEmptyLineAbove()
@@ -523,18 +381,6 @@ endfunction
 set guioptions-=r
 set guioptions-=L
 
-"Set some clang_complete options
-let g:clang_snippets=1
-"let g:clang_complete_copen=1
-nmap <leader>q :call g:ClangUpdateQuickFix()<CR>
-let g:clang_user_options='|| exit 0' " complete even with errors
-"Use persistent libclang via python. Requires libclang.dylib in
-"DYLD_LIBRARY_PATH.
-"let g:clang_library_path='/Volumes/luxo/Users/jrk/Dropbox/Projects/fimage/FImage/llvm/Debug+Asserts/lib/'
-let g:clang_library_path='/Developer/usr/clang-ide/lib'
-"let g:clang_use_library=1
-let g:clang_debug=1
-
 "Set filetype for simplenote to markdown
 " DOESN'T WORK YET
 "autocmd BufNewFile,BufRead */simplenote/*.txt setf markdown
@@ -561,12 +407,8 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
 set writebackup
 
-
 " map Esc to :noh to turn off search highlights (until the next search or `n`)
 nnoremap <esc> :noh<return><esc>
-
-" EasyMotion leader
-let g:EasyMotion_leader_key = '<Leader>e'
 
 " Good ideas via http://items.sjbach.com/319/configuring-vim-right
 "Use smart-case searching
@@ -589,17 +431,5 @@ set undodir=~/.undo
 
 "Set MacVim full-screen to only maximize vertically
 set fuopt=maxvert
-
-" OCaml tabstop, to match omlet_indent behavior
-autocmd FileType omlet setlocal expandtab shiftwidth=2 softtabstop=2
-
-"Make tab run indentation when hit in insert mode, a la Emacs (C-f is the default for that in Vim):
-" NOTE: this may conflict with snipmate expansion
-"autocmd FileType omlet set indentkeys+=,!^I
-
-"OMLet OCaml settings
-"http://www.lix.polytechnique.fr/~dbaelde/productions/omlet.html
-"let g:ocaml_folding = 1
-let g:omlet_indent_let = 0
 
 autocmd FileType ocaml set commentstring=(*\ %s\ *)

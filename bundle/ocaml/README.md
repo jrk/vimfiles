@@ -1,1 +1,0 @@
-Most of the old [OMLet plugin](http://www.lix.polytechnique.fr/~dbaelde/productions/omlet.html) has been subsumed by the native Vim OCaml module. The new indentation scheme is substantially less powerful, however. This just overloads the indentation mechanism with the last version of OMLet's indentation. It seems to work as expected.
