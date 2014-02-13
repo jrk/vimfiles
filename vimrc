@@ -18,6 +18,10 @@ Bundle 'gmarik/vundle'
 " original repos on GitHub
 "Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
+Bundle 'junegunn/goyo.vim'
+"Bundle 'amix/vim-zenroom2'
+Bundle 'tpope/vim-markdown'
+"Bundle 'vim-pandoc/vim-pandoc'
 
 filetype plugin indent on     " required!
 "
